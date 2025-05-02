@@ -79,9 +79,15 @@ El análisis predictivo se ha convertido en una herramienta fundamental para la 
 ## Descripción del Dataset
 
 * **Origen:** Kaggle (archivo CSV)
-* **Registros:** N filas
-* **Variables:** M columnas, incluyen numéricas (continuas) y categóricas.
-* **Objetivo:** Variable `Y` (clasificación o regresión según contexto).
+* **Registros:** 1 000 filas (los 1000 videos más vistos en YouTube)
+* **Variables:** 16 columnas, incluyendo texto (título, canal), categóricas (categoría de video) y numéricas (vistas, me gusta, no me gusta, comentarios)
+* **Contenido clave:**
+
+  * `title`: Título del video
+  * `channel`: Nombre del canal
+  * `views`, `likes`, `dislikes`, `comment_count`
+  * `category_id`: ID numérica de la categoría
+* **Objetivo:** Predecir la popularidad (p. ej., clasificar videos en rangos de vistas)
 
 ## Carga y Preprocesamiento
 
@@ -113,6 +119,89 @@ Estandarizamos usando z-score:
 $x' = \frac{x - \mu}{\sigma}$
 
 ## División del Dataset
+
+```kotlin
+val (train, test) = DataSplitter.split(df, trainSize = 0.8, seed = 42)
+```
+
+Se fija `trainSize = 0.8` y `seed = 42` para asegurar reproducibilidad.
+
+## Explicación de Módulos Clave del Código
+
+### CsvLoader.kt
+
+```kotlin
+object CsvLoader {
+    fun load(path: String): DataFrame {
+        return Reader().readAll(path)  // lee CSV usando kotlin-csv
+    }
+}
+```
+
+* Encapsula la lectura de CSV y devuelve un DataFrame-like.
+
+### MissingValueImputer.kt
+
+```kotlin
+object MissingValueImputer {
+    fun impute(df: DataFrame): DataFrame {
+        // elimina columnas con >50% nulos
+        // aplica media a numéricas y moda a categóricas
+    }
+}
+```
+
+* Filtra y completa valores faltantes para evitar sesgos.
+
+### CategoricalEncoder.kt
+
+```kotlin
+object CategoricalEncoder {
+    fun encode(df: DataFrame): DataFrame {
+        // detecta columnas String y aplica one-hot o label encoding
+    }
+}
+```
+
+* Transforma variables cualitativas en numéricas.
+
+### Scaler.kt
+
+```kotlin
+object Scaler {
+    fun scale(df: DataFrame): DataFrame {
+        // z-score: (x - media) / desviación
+    }
+}
+```
+
+* Normaliza características para mejorar convergencia.
+
+### RandomForestTrainer.kt
+
+```kotlin
+object RandomForestTrainer {
+    fun train(df: DataFrame, nTrees: Int, maxDepth: Int, seed: Int): RandomForest {
+        return RandomForest.fit(df, ...)
+    }
+}
+```
+
+* Entrena modelo con parámetros ajustables.
+
+### ModelEvaluator.kt
+
+```kotlin
+object ModelEvaluator {
+    fun evaluate(model: RandomForest, df: DataFrame): Metrics {
+        // calcula accuracy, precision, recall, F1
+    }
+}
+```
+
+* Genera métricas de desempeño y exporta CSV.
+
+## Selección e Implementación del Modelo
 
 ```kotlin
 val (train, test) = DataSplitter.split(df, trainSize = 0.8, seed = 42)
