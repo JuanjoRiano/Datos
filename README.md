@@ -1,170 +1,203 @@
-# Análisis Predictivo de Datos con Kotlin
+Análisis Predictivo de Datos con Kotlin
 
-## Autores
+  
 
-- Juan José Riaño  
-- Juan Sebastián Tibatá  
-- Gerardo Ropero Rojas  
-- Valentina Montenegro Quevedo  
+Descripción
 
-## Descripción
+Este proyecto implementa un flujo completo de análisis predictivo de datos utilizando Kotlin, aplicado sobre un dataset público descargado de Kaggle. Cubre todas las fases del ciclo de vida del dato:
 
-Este proyecto implementa un flujo completo de **análisis predictivo de datos en Kotlin**, aplicado sobre un dataset público descargado de [Kaggle](https://www.kaggle.com/). Cubre todas las fases del ciclo de vida del dato: carga, preprocesamiento, partición, modelado, evaluación y visualización de resultados.
+Carga de datos
 
-## Estructura del Repositorio
+Preprocesamiento (imputación, codificación, escalado)
 
-/
-├── data/
-│ ├── raw.csv # Dataset original descargado de Kaggle
-│ └── processed.csv # Dataset tras limpieza y codificación
-├── results/
-│ ├── metrics.csv # Métricas de evaluación del modelo
-│ └── feature_importance.png # Gráfica de importancia de características
-├── src/
-│ ├── Main.kt # Punto de entrada (CLI)
-│ ├── loader/
-│ │ └── CsvLoader.kt # Lectura de archivos CSV
-│ ├── preprocess/
-│ │ ├── MissingValueImputer.kt # Gestión de valores nulos
-│ │ ├── CategoricalEncoder.kt # Codificación de variables categóricas
-│ │ └── Scaler.kt # Normalización y estandarización
-│ ├── split/
-│ │ └── DataSplitter.kt # División train/test
-│ ├── model/
-│ │ ├── RandomForestTrainer.kt # Entrenamiento de Random Forest
-│ │ └── ModelEvaluator.kt # Cálculo de métricas
-│ └── utils/
-│ └── Utils.kt # Funciones auxiliares
-├── build.gradle.kts # Configuración de Gradle y dependencias
-├── report.tex # Informe técnico en LaTeX
-└── README.md # Este archivo
+División en conjuntos de entrenamiento y prueba
 
-markdown
-Copiar
-Editar
+Entrenamiento de un modelo de bosque aleatorio (Random Forest)
 
-## Requisitos
+Evaluación de métricas (accuracy, precision, recall, F1-score)
 
-- Java Development Kit (JDK) 11 o superior  
-- Kotlin 1.5+  
-- Gradle 7+  
+Visualización de la importancia de características
 
-### Dependencias principales
+Autores:
 
-- [Smile](https://haifengl.github.io/) – Biblioteca de aprendizaje automático  
-- [kotlin-csv](https://github.com/doyaaaaaken/kotlin-csv) – Lectura y escritura de CSV  
-- (Opcional) [Weka](https://www.cs.waikato.ac.nz/ml/weka/) o [DL4J](https://deeplearning4j.konduit.ai/) – Para comparativas
+Juan José Riaño
 
-## Instalación
+Juan Sebastián Tibatá
 
-1. Clonar el repositorio:
+Gerardo Ropero Rojas
 
-```bash
-git clone https://github.com/JuanjoRiano/Datos.git
-cd Datos
-Descargar el dataset:
+Valentina Montenegro Quevedo
 
-Regístrate en Kaggle, descarga el archivo CSV del dataset elegido.
+Tabla de Contenidos
 
-Renómbralo como raw.csv y colócalo dentro de la carpeta data/.
+Estructura del Repositorio
 
-Construir el proyecto:
+Requisitos
 
-bash
-Copiar
-Editar
-./gradlew build
+Instalación
+
 Uso
-Ejecución desde CLI
-bash
-Copiar
-Editar
-./gradlew run --args="--input data/raw.csv --output results/"
-Parámetros:
-
---input <ruta>: Ruta al archivo CSV original (por ejemplo, data/raw.csv)
-
---output <carpeta>: Carpeta donde se guardarán los resultados (métricas y gráficas)
 
 Flujo de Trabajo
+
+Explicación del Código
+
+Personalización y Extensiones
+
+Resultados de Ejemplo
+
+Informe Técnico
+
+Contribución
+
+Licencia
+
+Estructura del Repositorio
+
+Datos/
+├── data/                  # Datos de entrada
+│   ├── raw.csv            # Dataset original descargado de Kaggle
+│   └── processed.csv      # Dataset tras limpieza y codificación
+├── results/               # Salida de resultados
+│   ├── metrics.csv        # Métricas de evaluación del modelo
+│   └── feature_importance.png # Gráfica de importancia de características
+├── src/
+│   ├── Main.kt            # Punto de entrada (CLI)
+│   ├── loader/
+│   │   └── CsvLoader.kt   # Lectura de archivos CSV
+│   ├── preprocess/
+│   │   ├── MissingValueImputer.kt  # Imputación de valores nulos
+│   │   ├── CategoricalEncoder.kt   # Codificación de variables categóricas
+│   │   └── Scaler.kt                # Normalización y estandarización
+│   ├── split/
+│   │   └── DataSplitter.kt         # División en train/test
+│   ├── model/
+│   │   ├── RandomForestTrainer.kt  # Entrenamiento de Random Forest
+│   │   └── ModelEvaluator.kt       # Cálculo de métricas (accuracy, precision, recall, F1)
+│   └── utils/
+│       └── Utils.kt                # Funciones auxiliares (logging, validaciones)
+├── build.gradle.kts      # Configuración de Gradle y dependencias
+├── settings.gradle.kts   # Configuración de proyecto
+├── gradlew, gradlew.bat  # Scripts wrapper de Gradle
+├── report.tex            # Informe técnico en LaTeX
+└── README.md             # Documento de descripción (este archivo)
+
+Requisitos
+
+Java Development Kit (JDK) 11 o superior
+
+Kotlin 1.5 o superior
+
+Gradle 7 o superior
+
+Dependencias Principales
+
+Smile – Biblioteca de aprendizaje automático
+
+kotlin-csv – Lectura y escritura de CSV
+
+(Opcional) Weka o DL4J – Para comparativas
+
+Instalación
+
+Clonar el repositorio:
+
+git clone https://github.com/JuanjoRiano/Datos.git
+cd Datos
+
+Colocar el dataset descargado de Kaggle:
+
+Descarga el CSV desde Kaggle y renómbralo a raw.csv.
+
+Copia raw.csv dentro de la carpeta data/.
+
+Construir el proyecto con Gradle:
+
+./gradlew build
+
+Uso
+
+Ejecuta el flujo completo desde la línea de comandos:
+
+./gradlew run --args="--input data/raw.csv --output results/"
+
+Parámetros:
+
+--input <ruta>: Ruta al archivo CSV original (por ejemplo, data/raw.csv).
+
+--output <carpeta>: Carpeta donde se guardarán los resultados (por ejemplo, results/).
+
+Flujo de Trabajo
+
 Carga de datos
-CsvLoader.load(path: String): DataFrame
+
+val df = CsvLoader.load(inputPath)
 
 Preprocesamiento
 
-Imputación de valores nulos (MissingValueImputer)
+Imputación de valores nulos: MissingValueImputer
 
-Codificación de variables categóricas (CategoricalEncoder)
+Codificación de variables categóricas: CategoricalEncoder
 
-Normalización o estandarización (Scaler)
+Escalado de características: Scaler
 
-División del dataset
+División del conjunto
 
-80% entrenamiento / 20% prueba (DataSplitter)
+val (train, test) = DataSplitter.split(df, trainSize = 0.8)
 
 Entrenamiento del modelo
 
-kotlin
-Copiar
-Editar
-RandomForestTrainer.train(trainData, nTrees = 100, maxDepth = 10, seed = 42)
-Evaluación
-ModelEvaluator.evaluate(model, testData)
+val model = RandomForestTrainer.train(train, nTrees = 100, maxDepth = 10, seed = 42)
 
-Métricas: Accuracy, Precision, Recall, F1-score
+Evaluación
+
+val metrics = ModelEvaluator.evaluate(model, test)
 
 Visualización
 
-Importancia de características (results/feature_importance.png)
+Se genera la gráfica results/feature_importance.png mostrando la importancia relativa de cada característica.
 
-Configuración y Personalización
-Hiperparámetros del Random Forest
-Modifica RandomForestTrainer.kt para ajustar nTrees, maxDepth, seed, etc.
+Explicación del Código
 
-Proporción del split
-Edita DataSplitter.kt para usar una división distinta (por ejemplo, 70/30)
+CsvLoader.kt: Utiliza kotlin-csv para leer un CSV en una estructura de datos interna (DataFrame-like).
 
-Incluir otros modelos
-Agrega clases en model/ que implementen tu modelo y actualiza Main.kt para integrarlos al CLI.
+MissingValueImputer.kt: Detecta columnas con valores nulos y aplica estrategias de imputación (media, mediana o moda).
+
+CategoricalEncoder.kt: Transforma variables categóricas en representaciones numéricas (one-hot encoding o label encoding).
+
+Scaler.kt: Normaliza o estandariza columnas numéricas según configuración (min-max o z-score).
+
+DataSplitter.kt: Divide aleatoriamente el dataset en subconjuntos de entrenamiento y prueba según proporción definida.
+
+RandomForestTrainer.kt: Construye y entrena un modelo de bosque aleatorio usando la librería Smile.
+
+ModelEvaluator.kt: Calcula métricas clave de clasificación: accuracy, precision, recall y F1-score, y exporta metrics.csv.
+
+Utils.kt: Funciones auxiliares para validación de rutas, logging y formateo de resultados.
+
+Main.kt: Gestiona los argumentos de CLI, orquesta el flujo completo y maneja la escritura de resultados.
+
+Personalización y Extensiones
+
+Hiperparámetros: Ajusta nTrees, maxDepth y seed en RandomForestTrainer.kt.
+
+Proporción de división: Cambia la proporción de entrenamiento en DataSplitter.kt (por defecto 80/20).
+
+Nuevos modelos: Añade clases en src/model/ que implementen otros algoritmos y registra en Main.kt.
+
+Comparativas: Integra Weka o DL4J para comparar el rendimiento con otros frameworks.
 
 Resultados de Ejemplo
-Al ejecutar el flujo completo se genera:
 
-results/metrics.csv
+Al ejecutar el proyecto, en results/metrics.csv encontrarás:
 
-mathematica
-Copiar
-Editar
 Métrica,Valor
 Accuracy,0.89
 Precision,0.88
 Recall,0.85
 F1-score,0.86
-results/feature_importance.png
-Gráfica que muestra la importancia relativa de cada característica.
 
-Informe Técnico
-El archivo report.tex contiene:
+Y en results/feature_importance.png una gráfica similar a:
 
-Introducción y objetivo
 
-Descripción del dataset
-
-Metodología de carga y preprocesamiento
-
-Justificación del modelo y decisiones tomadas
-
-Resultados y análisis
-
-Conclusiones y recomendaciones
-
-Para compilar el informe:
-
-bash
-Copiar
-Editar
-pdflatex report.tex
-Licencia
-Este proyecto está licenciado bajo la MIT License.
-Consulta el archivo LICENSE para más información.
 
